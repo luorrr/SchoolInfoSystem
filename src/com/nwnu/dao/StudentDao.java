@@ -72,15 +72,15 @@ public class StudentDao {
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
-		List<Student> stu = new ArrayList<Student>();
+		List<Student> stuList = new ArrayList<Student>();
 		Student s = null;
 		while(rs.next()) {
 			s = new Student(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
 					rs.getString("major"), rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
 					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
-			stu.add(s);
+			stuList.add(s);
 		}
-		return stu;
+		return stuList;
 	}
 	
 	/**
@@ -111,4 +111,31 @@ public class StudentDao {
 		}
 		return s;
 	}
+	
+	/**
+	 * 
+	 * @param dateBegin
+	 * @param dateEnd
+	 * @return 学生列表
+	 * @throws SQLException
+	 */
+	public List<Student> quaryByDate(Date dateBegin, Date dateEnd) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select * from studentinfo where recordDate between '" + dateBegin + "' and '" + dateEnd + "'";
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Student> stuList = new ArrayList<Student>();
+		Student s = null;
+		while(rs.next()) {
+			s = new Student(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("major"), rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			stuList.add(s);
+		}
+		return stuList;
+	}
+	
 }

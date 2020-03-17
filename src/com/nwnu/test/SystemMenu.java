@@ -123,4 +123,32 @@ public class SystemMenu {
 		System.out.print("\n");
 	}
 	
+	/**
+	 * ·打印第二层菜单
+	 */
+	public static void thirdMenu() {
+		System.out.print("\n");
+		prints(15," ");
+		prints(30,"*");
+		System.out.print("\n");
+		prints(15," ");
+		prints(1,"*");
+		prints(6," ");
+		System.out.print("1 -- 查询指定日期区间内的感染人数.");
+		prints(5," ");
+		prints(1,"*");
+		System.out.print("\n");
+		prints(15," ");
+		prints(1,"*");
+		prints(6," ");
+		System.out.print("2 -- 查询指定日期区间内的人员地区分布.");
+		prints(3," ");
+		prints(1,"*");
+		System.out.print("\n");
+		prints(15," ");
+		prints(30,"*");
+		System.out.print("\n");
+		System.out.print("\n");
+	}
+	
 }

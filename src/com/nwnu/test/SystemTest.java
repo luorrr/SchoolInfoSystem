@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import com.nwnu.dao.StudentDao;
 import com.nwnu.dao.TeacherDao;
 import com.nwnu.pojo.Student;
 import com.nwnu.pojo.Teacher;
+import com.nwnu.util.BarChart;
+import com.nwnu.util.SqlCreate;
 
 /**
  * Filename: SystemTest.java
@@ -140,6 +144,41 @@ public class SystemTest {
 					break;
 				}
 				case 3: {
+					SqlCreate sql = new SqlCreate();
+					SystemMenu.thirdMenu();
+					System.out.print("请输入要执行的选项：");
+					boolean judge = true;
+					while(judge) {
+						int choice3 = sc.nextInt();
+						switch(choice3) {
+							case 1: {
+								System.out.print("请输入要查询的日期区间（日期格式：yyyyMMdd）：\n起始日期      截止日期\n");
+								
+								JFrame frame = new JFrame("疫情信息统计图");
+								frame.add(new BarChart(sc.next(), sc.next(), choice3).getChartPanel());
+								frame.setBounds(50, 50, 800, 400);
+								frame.setVisible(true);
+								
+								judge = false;
+								break;
+							}
+							case 2: {
+								System.out.print("请输入要查询的日期区间（日期格式：yyyyMMdd）：\n起始日期   截止日期\n");
+								
+								JFrame frame = new JFrame("疫情信息统计图");
+								frame.add(new BarChart(sc.next(), sc.next(), choice3).getChartPanel());
+								frame.setBounds(50, 50, 800, 400);
+								frame.setVisible(true);
+								
+								judge = false;
+								break;
+							}
+							default: {
+								System.out.print("\n非法输入！\n请重新输入：");
+								break;
+							}
+						}
+					}
 					
 					break;
 				}

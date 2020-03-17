@@ -70,15 +70,15 @@ public class TeacherDao {
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
-		List<Teacher> tea = new ArrayList<Teacher>();
+		List<Teacher> teaList = new ArrayList<Teacher>();
 		Teacher t = null;
 		while(rs.next()) {
 			t = new Teacher(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
 					rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
 					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
-			tea.add(t);
+			teaList.add(t);
 		}
-		return tea;
+		return teaList;
 	}
 	
 	/**
@@ -109,4 +109,31 @@ public class TeacherDao {
 		}
 		return t;
 	}
+	
+	/**
+	 * 
+	 * @param dateBegin
+	 * @param dateEnd
+	 * @return 教师列表
+	 * @throws SQLException
+	 */
+	public List<Teacher> quaryByDate(Date dateBegin, Date dateEnd) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select * from teacherinfo where recordDate between '" + dateBegin + "' and '" + dateEnd + "'";
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Teacher> teaList = new ArrayList<Teacher>();
+		Teacher t = null;
+		while(rs.next()) {
+			t = new Teacher(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			teaList.add(t);
+		}
+		return teaList;
+	}
+	
 }
