@@ -15,7 +15,6 @@ import com.nwnu.dao.TeacherDao;
 import com.nwnu.pojo.Student;
 import com.nwnu.pojo.Teacher;
 import com.nwnu.util.BarChart;
-import com.nwnu.util.SqlCreate;
 
 /**
  * Filename: SystemTest.java
@@ -144,7 +143,7 @@ public class SystemTest {
 					break;
 				}
 				case 3: {
-					SqlCreate sql = new SqlCreate();
+					
 					SystemMenu.thirdMenu();
 					System.out.print("请输入要执行的选项：");
 					boolean judge = true;
