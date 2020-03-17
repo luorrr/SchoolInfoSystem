@@ -53,11 +53,11 @@ public class BarChart {
 		if (choice == 1) {
 			title = dateBegin + "至" + dateEnd + "感染成员数量统计";
 		} else if (choice == 2) {
-			title = dateBegin + "至" + dateEnd + "成员地区分布统计";
+			title = dateBegin + "至" + dateEnd + "感染人员地区分布统计";
 		}
 		
 		//创建数据集
-		CategoryDataset dataSet = getDateSet(dateBegin, dateEnd);
+		CategoryDataset dataSet = getDateSet(dateBegin, dateEnd, choice);
 		//处理图表
 		JFreeChart chart = ChartFactory.createBarChart(title, "数据类型", "数量", dataSet, 
 				PlotOrientation.VERTICAL, true, false, false);
@@ -80,14 +80,20 @@ public class BarChart {
 		panel = new ChartPanel(chart, true);
 	}
 	
-	public static CategoryDataset getDateSet(Date dateBegin, Date dateEnd) {
+	public static CategoryDataset getDateSet(Date dateBegin, Date dateEnd, int choice) {
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		List<Student> stuList = new ArrayList<Student>();
 		List<Teacher> teaList = new ArrayList<Teacher>();
 		
 		try {
-			stuList = stuDao.quaryByDate(dateBegin, dateEnd);
-			teaList = teaDao.quaryByDate(dateBegin, dateEnd);
+			if (choice == 1) {
+				stuList = stuDao.quaryByDate(dateBegin, dateEnd, false);
+				teaList = teaDao.quaryByDate(dateBegin, dateEnd, false);
+			} else {
+				stuList = stuDao.quaryByDate(dateBegin, dateEnd, true);
+				teaList = teaDao.quaryByDate(dateBegin, dateEnd, true);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,18 +101,10 @@ public class BarChart {
 		}
 		
 		for (Student s:stuList) {
-			int count = 0;
-			if (s.getDiagnosed().equalsIgnoreCase("0")) {
-				count++;
-			}
-			dataSet.addValue(count, "学生", s.getRecordDate());
+			dataSet.addValue(s.getCount(), "学生", s.getRecordDate());
 		}
 		for (Teacher t:teaList) {
-			int count = 0;
-			if (t.getDiagnosed().equalsIgnoreCase("0")) {
-				count++;
-			}
-			dataSet.addValue(count, "教师", t.getRecordDate());
+			dataSet.addValue(t.getCount(), "教师", t.getRecordDate());
 		}
 		
 		return dataSet;

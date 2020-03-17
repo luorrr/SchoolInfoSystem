@@ -117,20 +117,30 @@ public class TeacherDao {
 	 * @return 教师列表
 	 * @throws SQLException
 	 */
-	public List<Teacher> quaryByDate(Date dateBegin, Date dateEnd) throws SQLException {
+	public List<Teacher> quaryByDate(Date dateBegin, Date dateEnd, boolean isProvince) throws SQLException {
 		Connection conn = DbUtil.getConnection();
 		Statement stmt = conn.createStatement();
 		//SQL
-		String sql = "select * from teacherinfo where recordDate between '" + dateBegin + "' and '" + dateEnd + "'";
+		String sql = "";
+		if (isProvince) {
+			sql = "select count(*) count,province from teacherinfo where recordDate between '" + dateBegin + "' and '" + 
+					dateEnd + "' and diagnosed = '1' Group By province;";
+		} else {
+			sql = "select count(*) count,recordDate from teacherinfo where recordDate between '" + dateBegin + "' and '" + 
+					dateEnd + "' and diagnosed = '1' Group By recordDate;";
+		}
+		
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
 		List<Teacher> teaList = new ArrayList<Teacher>();
 		Teacher t = null;
 		while(rs.next()) {
-			t = new Teacher(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
-					rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
-					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			if (isProvince) {
+				t = new Teacher(rs.getInt("count"), null, rs.getString("province"));
+			} else {
+				t = new Teacher(rs.getInt("count"), rs.getDate("recordDate"), null);
+			}
 			teaList.add(t);
 		}
 		return teaList;

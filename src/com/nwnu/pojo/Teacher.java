@@ -27,6 +27,13 @@ public class Teacher {
 	private String city;
 	private String diagnosed;
 	private BigDecimal temperature;
+	private int count;
+	
+	public Teacher(int count, Date recordDate, String province) {
+		this.count = count;
+		this.recordDate = recordDate;
+		this.province = province;
+	}
 	
 	public Teacher(String id, String name, String sex, String college, String phoneNumber, Date recordDate, 
 			String province, String city, String diagnosed, BigDecimal temperature) {
@@ -116,6 +123,12 @@ public class Teacher {
 	}
 	public void setTemperature(BigDecimal temperature) {
 		this.temperature = temperature;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	@Override

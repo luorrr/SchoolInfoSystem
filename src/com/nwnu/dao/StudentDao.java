@@ -116,23 +116,34 @@ public class StudentDao {
 	 * 
 	 * @param dateBegin
 	 * @param dateEnd
-	 * @return 学生列表
+	 * @param isProvince
+	 * @return 学生信息列表
 	 * @throws SQLException
 	 */
-	public List<Student> quaryByDate(Date dateBegin, Date dateEnd) throws SQLException {
+	public List<Student> quaryByDate(Date dateBegin, Date dateEnd, boolean isProvince) throws SQLException {
 		Connection conn = DbUtil.getConnection();
 		Statement stmt = conn.createStatement();
 		//SQL
-		String sql = "select * from studentinfo where recordDate between '" + dateBegin + "' and '" + dateEnd + "'";
+		String sql = "";
+		if (isProvince) {
+			sql = "select count(*) count,province from studentinfo where recordDate between '" + dateBegin + "' and '" + 
+					dateEnd + "' and diagnosed = '1' Group By province;";
+		} else {
+			sql = "select count(*) count,recordDate from studentinfo where recordDate between '" + dateBegin + "' and '" + 
+					dateEnd + "' and diagnosed = '1' Group By recordDate;";
+		}
+		
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
 		List<Student> stuList = new ArrayList<Student>();
 		Student s = null;
 		while(rs.next()) {
-			s = new Student(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
-					rs.getString("major"), rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
-					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			if (isProvince) {
+				s = new Student(rs.getInt("count"), null, rs.getString("province"));
+			} else {
+				s = new Student(rs.getInt("count"), rs.getDate("recordDate"), null);
+			}
 			stuList.add(s);
 		}
 		return stuList;
