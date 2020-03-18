@@ -30,12 +30,34 @@ public class Student {
 	private BigDecimal temperature;
 	private int count;
 	
+	/**
+	 * ·构造函数
+	 * 
+	 * @param count
+	 * @param recordDate
+	 * @param province
+	 */
 	public Student(int count, Date recordDate, String province) {
 		this.count = count;
 		this.recordDate = recordDate;
 		this.province = province;
 	}
 	
+	/**
+	 * ·构造函数
+	 * 
+	 * @param id
+	 * @param name
+	 * @param sex
+	 * @param college
+	 * @param major
+	 * @param phoneNumber
+	 * @param recordDate
+	 * @param province
+	 * @param city
+	 * @param diagnosed
+	 * @param temperature
+	 */
 	public Student(String id, String name, String sex, String college, String major, String phoneNumber, Date recordDate, 
 			String province, String city, String diagnosed, BigDecimal temperature) {
 		this.id = id;
@@ -51,6 +73,22 @@ public class Student {
 		this.temperature = temperature;
 	}
 	
+	/**
+	 * ·构造函数
+	 * 
+	 * @param id
+	 * @param name
+	 * @param sex
+	 * @param college
+	 * @param major
+	 * @param phoneNumber
+	 * @param recordDate
+	 * @param province
+	 * @param city
+	 * @param diagnosed
+	 * @param temperature
+	 * @throws ParseException
+	 */
 	public Student(String id, String name, String sex, String college, String major, String phoneNumber, String recordDate, 
 			String province, String city, String diagnosed, BigDecimal temperature) throws ParseException {
 		this.id = id;
@@ -66,7 +104,6 @@ public class Student {
 		this.diagnosed = diagnosed;
 		this.temperature = temperature;
 	}
-	
 	
 	public String getId() {
 		return id;

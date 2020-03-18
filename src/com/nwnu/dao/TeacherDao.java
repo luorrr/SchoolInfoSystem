@@ -111,10 +111,12 @@ public class TeacherDao {
 	}
 	
 	/**
+	 * ·通过起始日期查询数据
 	 * 
 	 * @param dateBegin
 	 * @param dateEnd
-	 * @return 教师列表
+	 * @param isProvince
+	 * @return
 	 * @throws SQLException
 	 */
 	public List<Teacher> quaryByDate(Date dateBegin, Date dateEnd, boolean isProvince) throws SQLException {

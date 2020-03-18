@@ -1,8 +1,6 @@
 package com.nwnu.test;
 
 import java.sql.Date;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ import com.nwnu.util.BarChart;
 /**
  * Filename: SystemTest.java
  * 
- * ·测试系统
+ * ·系统测试类
  * 
  * @author Luor
  * @version 1.0
@@ -32,10 +30,8 @@ public class SystemTest {
 	
 	/**
 	 * ·主函数
-	 * 
 	 * @param args
-	 * @throws SQLException 
-	 * @throws ParseException 
+	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
 		

@@ -42,6 +42,13 @@ public class BarChart {
 	private static StudentDao stuDao = new StudentDao();
 	private static TeacherDao teaDao = new TeacherDao();
 	
+	/**
+	 * ·柱状图参数设置
+	 * 
+	 * @param dateBeginString
+	 * @param dateEndString
+	 * @param choice
+	 */
 	public BarChart(String dateBeginString, String dateEndString, int choice) {
 		//处理表名与日期数据
 		Date dateBegin = null;
@@ -100,6 +107,14 @@ public class BarChart {
 		panel = new ChartPanel(chart, true);
 	}
 	
+	/**
+	 * ·数据集合获取与添加
+	 * 
+	 * @param dateBegin
+	 * @param dateEnd
+	 * @param choice
+	 * @return 数据集
+	 */
 	public static CategoryDataset getDateSet(Date dateBegin, Date dateEnd, int choice) {
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		List<Student> stuList = new ArrayList<Student>();
@@ -135,11 +150,14 @@ public class BarChart {
 				dataSet.addValue(t.getCount(), t.getProvince(), t.getProvince());
 			}
 		}
-		
-		
 		return dataSet;
 	}
 	
+	/**
+	 * ·返回ChartPanel
+	 * 
+	 * @return panel
+	 */
 	public ChartPanel getChartPanel() {
 		return panel;
 	}

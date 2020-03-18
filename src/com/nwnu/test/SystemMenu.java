@@ -124,7 +124,7 @@ public class SystemMenu {
 	}
 	
 	/**
-	 * ·打印第二层菜单
+	 * ·打印第三层菜单
 	 */
 	public static void thirdMenu() {
 		System.out.print("\n");

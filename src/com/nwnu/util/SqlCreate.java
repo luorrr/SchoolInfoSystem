@@ -22,7 +22,7 @@ import java.util.Random;
 public class SqlCreate {
 
 	//用户数量
-	private static int userCount = 2050;
+	private static int userCount = 2560;
 	
 	List<String> college_major = new ArrayList<String>() {
 		private static final long serialVersionUID = 1L;
@@ -148,7 +148,7 @@ public class SqlCreate {
 			reader = new BufferedReader(new FileReader(rfile));
 			writer = new BufferedWriter(new FileWriter(wfile));
 			String tempString = null;
-			int line = 1;
+			int line = 2001;
 			
 			//姓名读入
 			while ((tempString = reader.readLine()) != null && line <= userCount) {

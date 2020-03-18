@@ -113,6 +113,7 @@ public class StudentDao {
 	}
 	
 	/**
+	 * ·通过起始日期查询数据
 	 * 
 	 * @param dateBegin
 	 * @param dateEnd
