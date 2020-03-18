@@ -15,6 +15,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -59,11 +60,21 @@ public class BarChart {
 		//创建数据集
 		CategoryDataset dataSet = getDateSet(dateBegin, dateEnd, choice);
 		//处理图表
-		JFreeChart chart = ChartFactory.createBarChart(title, "数据类型", "数量", dataSet, 
+		JFreeChart chart = ChartFactory.createBarChart3D(title, "数据类型", "数量", dataSet, 
 				PlotOrientation.VERTICAL, true, false, false);
 		//处理汉字
 		//获取图表区域对象
 		CategoryPlot plot = chart.getCategoryPlot();
+		
+		//设置宽度
+		
+		BarRenderer3D barRenderer = new BarRenderer3D();
+		
+		barRenderer.setMaximumBarWidth(0.5);
+		barRenderer.setMinimumBarLength(0.1);
+		
+		plot.setRenderer(barRenderer);
+		
 		//水平底部列表
 		CategoryAxis domainAxis = plot.getDomainAxis();
 		//垂直标题
@@ -76,6 +87,7 @@ public class BarChart {
 		chart.getLegend().setItemFont(new Font("黑体", Font.BOLD, 12));
 		//设置标题字体
 		chart.getTitle().setFont(new Font("宋体",Font.BOLD,20));
+		
 		
 		panel = new ChartPanel(chart, true);
 	}
@@ -100,12 +112,22 @@ public class BarChart {
 			System.out.print("查询出错！\n");
 		}
 		
-		for (Student s:stuList) {
-			dataSet.addValue(s.getCount(), "学生", s.getRecordDate());
+		if (choice == 1) {
+			for (Student s:stuList) {
+				dataSet.addValue(s.getCount(), "学生", s.getRecordDate());
+			}
+			for (Teacher t:teaList) {
+				dataSet.addValue(t.getCount(), "教师", t.getRecordDate());
+			}
+		} else {
+			for (Student s:stuList) {
+				dataSet.addValue(s.getCount(), s.getProvince(), s.getProvince());
+			}
+			for (Teacher t:teaList) {
+				dataSet.addValue(t.getCount(), t.getProvince(), t.getProvince());
+			}
 		}
-		for (Teacher t:teaList) {
-			dataSet.addValue(t.getCount(), "教师", t.getRecordDate());
-		}
+		
 		
 		return dataSet;
 	}

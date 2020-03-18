@@ -141,7 +141,7 @@ public class SqlCreate {
 
 		File rfile = new File("resource/260Wname.txt");
 		File rfile2 = new File("resource/date.txt");
-		File wfile = new File("resource/SQLTeacher.txt");
+		File wfile = new File("resource/SQLTest.txt");
 		BufferedReader reader = null;
 		BufferedReader reader2 = null;
 		BufferedWriter writer = null;
@@ -172,7 +172,8 @@ public class SqlCreate {
 				//学生
 				int collegeMajorNum = rand.nextInt(29);
 				int provinceCityNum = rand.nextInt(32);
-				int diagNum = rand.nextInt(2);
+				//固定感染数据
+				//int diagNum = rand.nextInt(2);
 				
 				//日期读入
 				while((tempString2 = reader2.readLine()) != null) {
@@ -191,6 +192,8 @@ public class SqlCreate {
 					
 					writer.write("17393" + (phoneNumber + line) + "','");
 					writer.write(tempString2 + "','");
+					//随机感染数据
+					int diagNum = rand.nextInt(2);
 					writer.write(province_city.get(provinceCityNum) + "','");
 					writer.write(diagNum + "','");
 					BigDecimal tem = null;
