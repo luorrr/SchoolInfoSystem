@@ -102,11 +102,17 @@ public class SystemTest {
 								if (userType == 1) {
 									List<Teacher> teaList = new ArrayList<Teacher>();
 									teaList = teaDao.quaryById(sc.next());
-									System.out.print("工号   姓名   性别   学院   电话号码   记录日期   省/自治州/直辖市   市/州/区   是否感染   体温\n" + teaList);
+									System.out.print("工号      姓名      性别      学院      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n");
+									for (Teacher t:teaList) {
+										System.out.print(t);
+									}
 								} else if (userType == 2) {
 									List<Student> stuList = new ArrayList<Student>();
 									stuList = stuDao.quaryById(sc.next());
-									System.out.print("学号   姓名   性别   学院   专业   电话号码   记录日期   省/自治州/直辖市   市/州/区   是否感染   体温\n" + stuList);
+									System.out.print("学号      姓名      性别      学院      专业      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n");
+									for (Student s:stuList) {
+										System.out.print(s);
+									}
 								} else {
 									System.out.print("非法输入！\n");
 								}
@@ -122,10 +128,10 @@ public class SystemTest {
 								Date recordDate = new Date(sdf.parse(dateString).getTime());
 								if (userType == 1) {
 									Teacher tea = teaDao.findTeacherInfo(id, recordDate);
-									System.out.print("工号   姓名   性别   学院   电话号码   记录日期   省/自治州/直辖市   市/州/区   是否感染   体温\n" + tea);
+									System.out.print("工号      姓名      性别      学院      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n" + tea);
 								} else if (userType == 2) {
 									Student stu = stuDao.findStudentInfo(id, recordDate);
-									System.out.print("学号   姓名   性别   学院   专业   电话号码   记录日期   省/自治州/直辖市   市/州/区   是否感染   体温\n" + stu);
+									System.out.print("学号      姓名      性别      学院      专业      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n" + stu);
 								} else {
 									System.out.print("非法输入！\n");
 								}
