@@ -54,8 +54,8 @@ public class SystemTest {
 						int choice1 = sc.nextInt();
 						switch(choice1) {
 							case 1: {
-								System.out.print("请输入要插入的学生信息（每一项用空格隔开）：\n学号   姓名   性别   学院   专业   电话号码    记录日期（yyyyMMdd）   "
-										+ "省/自治州/直辖市   市/州/区   是否感染（1=是，0=否）   体温（3x.x）\n");
+								System.out.print("请输入要插入的学生信息（每一项用空格隔开）：\n学号（12位）   姓名   性别   学院   专业   电话号码    记录日期（yyyyMMdd）   "
+										+ "省/自治州/直辖市（详细名称）   市/州/区（详细名称）   是否感染（1=是，0=否）   体温（3x.x）\n");
 								Student stu = new Student(sc.next(), sc.next(), sc.next(), sc.next(), sc.next(), sc.next(), 
 										sc.next(), sc.next(), sc.next(), sc.next(), sc.nextBigDecimal());
 								if (stuDao.addStudent(stu)) {
@@ -100,14 +100,14 @@ public class SystemTest {
 								if (userType == 1) {
 									List<Teacher> teaList = new ArrayList<Teacher>();
 									teaList = teaDao.quaryById(sc.next());
-									System.out.print("工号      姓名      性别      学院      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n");
+									System.out.print(" 工号        姓名     性别          学院             电话号码         记录日期      省/自治州/直辖市     市/州/区    是否感染    体温\n");
 									for (Teacher t:teaList) {
 										System.out.print(t);
 									}
 								} else if (userType == 2) {
 									List<Student> stuList = new ArrayList<Student>();
 									stuList = stuDao.quaryById(sc.next());
-									System.out.print("学号      姓名      性别      学院      专业      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n");
+									System.out.print("    学号          姓名      性别           学院          专业        电话号码        记录日期       省/自治州/直辖市      市/州/区    是否感染    体温\n");
 									for (Student s:stuList) {
 										System.out.print(s);
 									}
@@ -126,10 +126,10 @@ public class SystemTest {
 								Date recordDate = new Date(sdf.parse(dateString).getTime());
 								if (userType == 1) {
 									Teacher tea = teaDao.findTeacherInfo(id, recordDate);
-									System.out.print("工号      姓名      性别      学院      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n" + tea);
+									System.out.print(" 工号      姓名      性别        学院          电话号码          记录日期        省/自治州/直辖市      市/州/区      是否感染      体温\n" + tea);
 								} else if (userType == 2) {
 									Student stu = stuDao.findStudentInfo(id, recordDate);
-									System.out.print("学号      姓名      性别      学院      专业      电话号码      记录日期      省/自治州/直辖市      市/州/区      是否感染      体温\n" + stu);
+									System.out.print("  学号      姓名      性别          学院            专业          电话号码          记录日期         省/自治州/直辖市      市/州/区      是否感染      体温\n" + stu);
 								} else {
 									System.out.print("非法输入！\n");
 								}
