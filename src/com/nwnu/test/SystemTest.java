@@ -44,6 +44,8 @@ public class SystemTest {
 		while(true) {
 			//界面
 			SystemMenu.mainMenu();
+			//SQL生成
+			//com.nwnu.util.SqlCreate sql = new com.nwnu.util.SqlCreate();
 			//分支
 			System.out.print("请输入要执行的选项：");
 			int choice = sc.nextInt();
@@ -150,12 +152,6 @@ public class SystemTest {
 				}
 				case 3: {
 					SystemMenu.thirdMenu();
-					
-					/**
-					 * 添加    朵玉笛
-					 */
-					
-					
 					System.out.print("请输入要执行的选项：");
 					boolean judge = true;
 					while(judge) {

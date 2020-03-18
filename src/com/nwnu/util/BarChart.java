@@ -1,6 +1,8 @@
 package com.nwnu.util;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.RenderingHints;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -13,6 +15,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer3D;
@@ -69,16 +72,21 @@ public class BarChart {
 		//设置宽度
 		
 		BarRenderer3D barRenderer = new BarRenderer3D();
-		
+		barRenderer.setBaseItemLabelsVisible(true);
+		barRenderer.setBaseItemLabelPaint(Color.black);
+		barRenderer.setBaseItemLabelFont(new Font("黑体",Font.BOLD,10));
+		barRenderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
 		barRenderer.setMaximumBarWidth(0.5);
 		barRenderer.setMinimumBarLength(0.1);
+		//barRenderer.setItemMargin(-0.1);
 		
 		plot.setRenderer(barRenderer);
 		
 		//水平底部列表
 		CategoryAxis domainAxis = plot.getDomainAxis();
+		chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF); 
 		//垂直标题
-		domainAxis.setTickLabelFont(new Font("宋体",Font.BOLD,12));
+		domainAxis.setTickLabelFont(new Font("宋体",Font.BOLD,6));
 		//水平底部标题
 		domainAxis.setLabelFont(new Font("黑体", Font.BOLD,16));
 		//获取柱状

@@ -132,14 +132,13 @@ public class SqlCreate {
 	 * ·构造函数
 	 */
 	public SqlCreate() {
-		System.out.println(province_city);
 
 		//前置数据
 		String id1 = "20170000";
 		int id2 = 1000;
 		int phoneNumber = 100000;
 
-		File rfile = new File("resource/260Wname.txt");
+		File rfile = new File("resource/name.txt");
 		File rfile2 = new File("resource/date.txt");
 		File wfile = new File("resource/SQLTest.txt");
 		BufferedReader reader = null;
@@ -153,10 +152,12 @@ public class SqlCreate {
 			
 			//姓名读入
 			while ((tempString = reader.readLine()) != null && line <= userCount) {
+				//教师
+				/*
 				if (line <= 2000) {
 					line++;
 					continue;
-				}
+				}*/
 				reader2 = new BufferedReader(new FileReader(rfile2));
 				String tempString2 = null;
 				
