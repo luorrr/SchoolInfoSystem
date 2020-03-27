@@ -1,5 +1,8 @@
 package com.nwnu.test;
 
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,9 +10,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import com.nwnu.dao.StudentDao;
 import com.nwnu.dao.TeacherDao;
+import com.nwnu.gui.LoginPanel;
 import com.nwnu.pojo.Student;
 import com.nwnu.pojo.Teacher;
 import com.nwnu.util.BarChart;
@@ -22,17 +28,49 @@ import com.nwnu.util.BarChart;
  * @author Luor
  * @version 1.0
  */
-public class SystemTest {
+public class ExamSystem {
 	
 	private static StudentDao stuDao = new StudentDao();
 	private static TeacherDao teaDao = new TeacherDao();
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	
+	private static int ScreenWidth = 450;
+	private static int ScreenHeight = 600;
+	
+	private static JFrame win = new JFrame();
+	private static JPanel panel = new JPanel();
+	
+	public static void main(String[] args) {
+		panel.setSize(ScreenWidth, ScreenHeight);
+		
+		LoginPanel menuPanel = new LoginPanel(win, panel);
+		menuPanel.setSize(ScreenWidth, ScreenHeight);
+		win.setSize(ScreenWidth, ScreenHeight);
+		win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		win.setLocationRelativeTo(null);
+		win.setTitle("西北师范大学疫情防控信息统计系统");
+		win.setResizable(false);
+		win.setVisible(true);
+		
+		win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		win.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int result = JOptionPane.showConfirmDialog(null, "确认退出?", "确认", JOptionPane.OK_CANCEL_OPTION, 
+                		JOptionPane.INFORMATION_MESSAGE);
+                if(result == JOptionPane.OK_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
+		
+	}
 	
 	/**
 	 * ·主函数
 	 * @param args
 	 * @throws Exception
 	 */
+	/*
 	public static void main(String[] args) throws Exception {
 		
 		//执行
@@ -196,6 +234,6 @@ public class SystemTest {
 			}
 		}
 		
-	}
+	}*/
 	
 }
