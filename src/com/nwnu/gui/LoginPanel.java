@@ -29,12 +29,13 @@ public class LoginPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static ManagerDao managerDao = new ManagerDao();
+	private static ManagerDao manDao = new ManagerDao();
 	
 	private static int ScreenWidth = 450;
 	private static int ScreenHeight = 600;
 
 	public LoginPanel(JFrame win, JPanel mainPanel) {
+		// clear panel
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		mainPanel.setLayout(null);
@@ -80,18 +81,19 @@ public class LoginPanel extends JPanel {
 		buttonPanel.add(btn, BorderLayout.CENTER);
 		mainPanel.add(buttonPanel);
 		
+		// Add to JFrame
 		win.add(mainPanel);
 		
 		btn.addActionListener(event -> {
 			Manager manager = null;
 			try {
-				manager = managerDao.findManager(fieldId.getText(), String.valueOf(fieldPasswd.getPassword()));
+				manager = manDao.findManager(fieldId.getText(), String.valueOf(fieldPasswd.getPassword()));
 			} catch (SQLException e) {
 				manager = null;
 				e.printStackTrace();
 			}
 			if (manager == null) {
-				JOptionPane.showConfirmDialog(null, "µÇÂ¼Ê§°Ü£¬¹¤ºÅ»òÃÜÂë´íÎó£¡","",JOptionPane.DEFAULT_OPTION);
+				JOptionPane.showConfirmDialog(null, "µÇÂ¼Ê§°Ü£¬¹¤ºÅ»òÃÜÂë´íÎó£¡","ÐÅÏ¢ÌáÊ¾",JOptionPane.DEFAULT_OPTION);
 			} else {
 				MenuPanel menuPanel = new MenuPanel(win, mainPanel, manager);
 				menuPanel.setSize(ScreenWidth, ScreenHeight);

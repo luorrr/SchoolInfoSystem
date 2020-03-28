@@ -31,41 +31,42 @@ public class MenuPanel extends JPanel {
 	private static int ScreenHeight = 600;
 	
 	public MenuPanel(JFrame win, JPanel mainPanel, Manager manager) {
+		// clear panel
 		mainPanel.removeAll();
 		mainPanel.updateUI();
 		mainPanel.setLayout(null);
 		
-		//titlePanel
+		// titlePanel
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new FlowLayout());
-		titlePanel.setBounds(ScreenWidth/2-320/2, ScreenHeight/4-220/2, 320, 60);
+		titlePanel.setBounds(ScreenWidth / 2 - 320 / 2, ScreenHeight / 4 - 220 / 2, 320, 60);
 		Font titleFont = new Font("宋体", Font.BOLD, 30);
 		JLabel labelTitle = new JLabel(manager.getName() + "您好！");
 		labelTitle.setFont(titleFont);
 		titlePanel.add(labelTitle);
 		mainPanel.add(titlePanel);
-		
-		//buttonPanel
-		//Set border
+
+		// buttonPanel
+		// Set border
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		Font mainBorderFont = new Font("宋体", Font.BOLD, 22);
 		Font borderFont = new Font("宋体", Font.BOLD, 18);
-		Border mainTitleBorder = BorderFactory.createTitledBorder(border, "选择功能", TitledBorder.LEFT, 
-				TitledBorder.TOP, mainBorderFont);
-		Border firstTitleBorder = BorderFactory.createTitledBorder(border, "添加成员信息", TitledBorder.LEFT, 
+		Border mainTitleBorder = BorderFactory.createTitledBorder(border, "选择功能", TitledBorder.LEFT, TitledBorder.TOP,
+				mainBorderFont);
+		Border firstTitleBorder = BorderFactory.createTitledBorder(border, "添加成员信息", TitledBorder.LEFT,
 				TitledBorder.TOP, borderFont);
-		Border secondTitleBorder = BorderFactory.createTitledBorder(border, "成员信息查询", TitledBorder.LEFT, 
+		Border secondTitleBorder = BorderFactory.createTitledBorder(border, "成员信息查询", TitledBorder.LEFT,
 				TitledBorder.TOP, borderFont);
-		Border thirdTitleBorder = BorderFactory.createTitledBorder(border, "成员信息统计图生成", TitledBorder.LEFT, 
+		Border thirdTitleBorder = BorderFactory.createTitledBorder(border, "成员信息统计图生成", TitledBorder.LEFT,
 				TitledBorder.TOP, borderFont);
-		Border fourthTitleBorder = BorderFactory.createTitledBorder(border, "导出成员信息", TitledBorder.LEFT, 
+		Border fourthTitleBorder = BorderFactory.createTitledBorder(border, "导出成员信息", TitledBorder.LEFT,
 				TitledBorder.TOP, borderFont);
-		//Create buttonPanel
+		// Create buttonPanel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));
-		buttonPanel.setBounds(ScreenWidth/2-320/2, ScreenHeight/2-360/2, 320, 400);
+		buttonPanel.setBounds(ScreenWidth / 2 - 320 / 2, ScreenHeight / 2 - 360 / 2, 320, 400);
 		Font btnFont = new Font("宋体", Font.BOLD, 16);
-		//firstPanel
+		// firstPanel
 		JPanel firstPanel = new JPanel();
 		firstPanel.setLayout(new GridLayout(1, 2, 15, 15));
 		JButton btn1 = new JButton("学生信息");
@@ -76,7 +77,7 @@ public class MenuPanel extends JPanel {
 		firstPanel.add(btn2);
 		firstPanel.setBorder(firstTitleBorder);
 		buttonPanel.add(firstPanel);
-		//secondPanel
+		// secondPanel
 		JPanel secondPanel = new JPanel();
 		secondPanel.setLayout(new GridLayout(1, 2, 10, 10));
 		JButton btn3 = new JButton("学号/工号");
@@ -87,7 +88,7 @@ public class MenuPanel extends JPanel {
 		secondPanel.add(btn4);
 		secondPanel.setBorder(secondTitleBorder);
 		buttonPanel.add(secondPanel);
-		//thirdPanel
+		// thirdPanel
 		JPanel thirdPanel = new JPanel();
 		thirdPanel.setLayout(new GridLayout(1, 2, 10, 10));
 		JButton btn5 = new JButton("感染人数统计");
@@ -98,7 +99,7 @@ public class MenuPanel extends JPanel {
 		thirdPanel.add(btn6);
 		thirdPanel.setBorder(thirdTitleBorder);
 		buttonPanel.add(thirdPanel);
-		//fourthPanel
+		// fourthPanel
 		JPanel fourthPanel = new JPanel();
 		fourthPanel.setLayout(new GridLayout(1, 1, 10, 10));
 		JButton btn7 = new JButton("Excel导出");
@@ -106,18 +107,20 @@ public class MenuPanel extends JPanel {
 		fourthPanel.add(btn7);
 		fourthPanel.setBorder(fourthTitleBorder);
 		buttonPanel.add(fourthPanel);
-		//setTitleBorder
+		// Set TitleBorder and add Panel
 		buttonPanel.setBorder(mainTitleBorder);
 		mainPanel.add(buttonPanel);
-		//Add to JFrame
+		// Add to JFrame
 		win.add(mainPanel);
 		
 		//ActionListener
 		btn1.addActionListener(event -> {
-			
+			AddInfoPanel addInfoPanel = new AddInfoPanel(win, mainPanel, manager, 0);
+			addInfoPanel.setSize(ScreenWidth, ScreenHeight);
 		});
 		btn2.addActionListener(event -> {
-			
+			AddInfoPanel addInfoPanel = new AddInfoPanel(win, mainPanel, manager, 1);
+			addInfoPanel.setSize(ScreenWidth, ScreenHeight);
 		});
 		btn3.addActionListener(event -> {
 			
