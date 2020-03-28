@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
@@ -183,12 +181,12 @@ public class AddInfoPanel extends JPanel {
 		Color bgColor = new Color(230,230,250);
 		inputPanel.setBackground(bgColor);
 		// JScollePane
-		JScrollPane scollPane = new JScrollPane(inputPanel);
-		scollPane.setBounds(ScreenWidth / 2 - 320 / 2, ScreenHeight / 2 - 380 / 2, 320, 360);
-		scollPane.setBackground(Color.WHITE);
-		scollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		mainPanel.add(scollPane);
+		JScrollPane scrollPane = new JScrollPane(inputPanel);
+		scrollPane.setBounds(ScreenWidth / 2 - 320 / 2, ScreenHeight / 2 - 380 / 2, 320, 360);
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(scrollPane);
 
 		// buttonPanel
 		JPanel buttonPanel = new JPanel();

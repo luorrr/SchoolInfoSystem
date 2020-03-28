@@ -17,6 +17,14 @@ import com.nwnu.pojo.Manager;
  */
 public class ManagerDao {
 	
+	/**
+	 * ·管理员登录信息查询
+	 * 
+	 * @param id
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public Manager findManager(String id, String password) throws SQLException {
 		Manager m = null;
 		// 获取数据库连接

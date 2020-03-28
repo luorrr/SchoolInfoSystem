@@ -15,8 +15,6 @@ import java.math.BigDecimal;
  */
 public class Student {
 	
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	
 	private String id;
 	private String name;
 	private String sex;
@@ -97,7 +95,7 @@ public class Student {
 		this.college = college;
 		this.major = major;
 		this.phoneNumber = phoneNumber;
-		Date date = new Date(sdf.parse(recordDate).getTime());
+		Date date = new Date(new SimpleDateFormat("yyyyMMdd").parse(recordDate).getTime());
 		this.recordDate = date;
 		this.province = province;
 		this.city = city;

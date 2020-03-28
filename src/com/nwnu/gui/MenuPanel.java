@@ -29,6 +29,8 @@ public class MenuPanel extends JPanel {
 	
 	private static int ScreenWidth = 450;
 	private static int ScreenHeight = 600;
+	private static int ShowScreenWidth = 1200;
+	private static int ShowScreenHeight = 660;
 	
 	public MenuPanel(JFrame win, JPanel mainPanel, Manager manager) {
 		// clear panel
@@ -123,19 +125,38 @@ public class MenuPanel extends JPanel {
 			addInfoPanel.setSize(ScreenWidth, ScreenHeight);
 		});
 		btn3.addActionListener(event -> {
-			
+			SelectInfoPanel selectInfoPanel = new SelectInfoPanel(win, mainPanel, manager, 0);
+			selectInfoPanel.setSize(ScreenWidth, ScreenHeight);
 		});
 		btn4.addActionListener(event -> {
-			
+			SelectInfoPanel selectInfoPanel = new SelectInfoPanel(win, mainPanel, manager, 1);
+			selectInfoPanel.setSize(ScreenWidth, ScreenHeight);
 		});
 		btn5.addActionListener(event -> {
-			
+			CreateChartFrame(manager, 0);
 		});
 		btn6.addActionListener(event -> {
-			
+			CreateChartFrame(manager, 1);
 		});
 		btn7.addActionListener(event -> {
 			
 		});
+	}
+	
+	public void CreateChartFrame(Manager manager, int chooseType) {
+		JFrame showWin = new JFrame();
+		JPanel showPanel = new JPanel();
+
+		showPanel.setSize(ShowScreenWidth, ShowScreenHeight);
+
+		ShowChartPanel showChartPanel = new ShowChartPanel(showWin, showPanel, manager, chooseType);
+		showChartPanel.setSize(ShowScreenWidth, ShowScreenHeight);
+
+		showWin.setSize(ShowScreenWidth, ShowScreenHeight);
+		showWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		showWin.setLocationRelativeTo(null);
+		showWin.setTitle("西北师范大学疫情防控信息统计系统");
+		showWin.setResizable(false);
+		showWin.setVisible(true);
 	}
 }
