@@ -20,7 +20,7 @@ import com.nwnu.pojo.Manager;
 /**
  * Filename: SystemPanel.java
  * 
- * ·登录界面
+ * ·管理员登录界面
  * 
  * @author Luor
  * @version 1.0
@@ -34,6 +34,12 @@ public class LoginPanel extends JPanel {
 	private static int ScreenWidth = 450;
 	private static int ScreenHeight = 600;
 
+	/**
+	 * ·在此界面进行管理员工号密码的输入以进行登录
+	 * 
+	 * @param win
+	 * @param mainPanel
+	 */
 	public LoginPanel(JFrame win, JPanel mainPanel) {
 		// clear panel
 		mainPanel.removeAll();

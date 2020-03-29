@@ -21,9 +21,10 @@ import java.util.Random;
  */
 public class SqlCreate {
 
-	//用户数量
+	// 用户数量
 	private static int userCount = 2560;
 	
+	// 学院-专业列表
 	List<String> college_major = new ArrayList<String>() {
 		private static final long serialVersionUID = 1L;
 
@@ -60,6 +61,7 @@ public class SqlCreate {
 		}
 	};
 	
+	// 学院列表
 	List<String> college = new ArrayList<String>() {
 		private static final long serialVersionUID = 1L;
 		{
@@ -88,6 +90,7 @@ public class SqlCreate {
 		}
 	};
 	
+	// 省份-城市列表
 	List<String> province_city = new ArrayList<String>() {
 		private static final long serialVersionUID = 1L;
 		{

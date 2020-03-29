@@ -111,12 +111,12 @@ public class TeacherDao {
 	}
 	
 	/**
-	 * ·通过起始日期查询数据
+	 * ·通过起始日期与截止日期查询数据
 	 * 
 	 * @param dateBegin
 	 * @param dateEnd
 	 * @param isProvince
-	 * @return
+	 * @return 教师信息列表
 	 * @throws SQLException
 	 */
 	public List<Teacher> quaryByDate(Date dateBegin, Date dateEnd, boolean isProvince) throws SQLException {
@@ -131,7 +131,6 @@ public class TeacherDao {
 			sql = "select count(*) count,recordDate from teacherinfo where recordDate between '" + dateBegin + "' and '" + 
 					dateEnd + "' and diagnosed = '1' Group By recordDate;";
 		}
-		
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
@@ -143,6 +142,67 @@ public class TeacherDao {
 			} else {
 				t = new Teacher(rs.getInt("count"), rs.getDate("recordDate"), null);
 			}
+			teaList.add(t);
+		}
+		return teaList;
+	}
+	
+	/**
+	 * ·根据学院与日期信息查询教师数据
+	 * 
+	 * @param college
+	 * @param date
+	 * @return 教师信息列表
+	 * @throws SQLException
+	 */
+	public List<Teacher> quaryByDeptAndDate(String college, Date date) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select * from teacherinfo where college = '" + college + "' and recordDate = '" + date + "'";
+		if (college.equalsIgnoreCase("西北师范大学")) {
+			sql = "select * from teacherinfo where recordDate = '" + date + "'";
+		}
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Teacher> teaList = new ArrayList<Teacher>();
+		Teacher t = null;
+		while(rs.next()) {
+			t = new Teacher(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			teaList.add(t);
+		}
+		return teaList;
+	}
+	
+	/**
+	 * ·根据学院信息查询教师数据
+	 * ·注：此查询方法需修改MySQL的默认模式，即去除select @@global.sql_mode查询中的ONLY_FULL_GROUP_BY
+	 * ·注：使用set @@global.sql_mode = ''方法
+	 * 
+	 * @param college
+	 * @return 教师信息列表
+	 * @throws SQLException
+	 */
+	public List<Teacher> quaryByDept(String college) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select *,count(distinct id) from teacherinfo where college = '" + college + "' group by id";
+		if (college.equalsIgnoreCase("西北师范大学")) {
+			sql = "select *,count(distinct id) from teacherinfo group by id";
+		}
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Teacher> teaList = new ArrayList<Teacher>();
+		Teacher t = null;
+		while(rs.next()) {
+			t = new Teacher(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
 			teaList.add(t);
 		}
 		return teaList;

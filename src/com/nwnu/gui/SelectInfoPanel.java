@@ -32,7 +32,7 @@ import com.nwnu.pojo.Teacher;
 /**
  * Filename: SelectInfoPanel.java
  * 
- * ·查询成员信息
+ * ·成员信息查询界面
  * 
  * @author Luor
  * @version 1.0
@@ -53,6 +53,14 @@ public class SelectInfoPanel extends JPanel {
 	private static int ShowScreenWidth = 1200;
 	private static int ShowScreenHeight = 600;
 
+	/**
+	 * ·此界面负责成员信息的录入以进行查询
+	 * 
+	 * @param win
+	 * @param mainPanel
+	 * @param manager
+	 * @param chooseType
+	 */
 	public SelectInfoPanel(JFrame win, JPanel mainPanel, Manager manager, int chooseType) {
 		// clear panel
 		mainPanel.removeAll();
@@ -305,6 +313,14 @@ public class SelectInfoPanel extends JPanel {
 		});
 	}
 	
+	/**
+	 * ·此方法负责创建显示查询结果的窗口
+	 * 
+	 * @param manager
+	 * @param chooseType
+	 * @param stuList
+	 * @param teaList
+	 */
 	public void CreateShowFrame(Manager manager, int chooseType, List<Student> stuList, List<Teacher> teaList) {
 		JFrame showWin = new JFrame();
 		JPanel showPanel = new JPanel();

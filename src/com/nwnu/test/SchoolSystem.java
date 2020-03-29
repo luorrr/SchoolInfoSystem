@@ -17,7 +17,7 @@ import com.nwnu.gui.LoginPanel;
  * @author Luor
  * @version 1.0
  */
-public class ExamSystem {
+public class SchoolSystem {
 	
 //	private static StudentDao stuDao = new StudentDao();
 //	private static TeacherDao teaDao = new TeacherDao();
@@ -29,6 +29,11 @@ public class ExamSystem {
 	private static JFrame win = new JFrame();
 	private static JPanel panel = new JPanel();
 	
+	/**
+	 * ·主函数，创建整体程序界面的窗口
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		panel.setSize(ScreenWidth, ScreenHeight);
 		

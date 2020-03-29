@@ -113,7 +113,7 @@ public class StudentDao {
 	}
 	
 	/**
-	 * ·通过起始日期查询数据
+	 * ·通过起始日期与截止日期查询数据
 	 * 
 	 * @param dateBegin
 	 * @param dateEnd
@@ -133,7 +133,6 @@ public class StudentDao {
 			sql = "select count(*) count,recordDate from studentinfo where recordDate between '" + dateBegin + "' and '" + 
 					dateEnd + "' and diagnosed = '1' Group By recordDate;";
 		}
-		
 		//执行
 		ResultSet rs = stmt.executeQuery(sql);
 		//添加用户信息
@@ -145,6 +144,67 @@ public class StudentDao {
 			} else {
 				s = new Student(rs.getInt("count"), rs.getDate("recordDate"), null);
 			}
+			stuList.add(s);
+		}
+		return stuList;
+	}
+	
+	/**
+	 * ·根据学院与日期信息查询学生数据
+	 * 
+	 * @param college
+	 * @param date
+	 * @return 学生信息列表
+	 * @throws SQLException
+	 */
+	public List<Student> quaryByDeptAndDate(String college, Date date) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select * from studentinfo where college = '" + college + "' and recordDate = '" + date + "'";
+		if (college.equalsIgnoreCase("西北师范大学")) {
+			sql = "select * from studentinfo where recordDate = '" + date + "'";
+		}
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Student> stuList = new ArrayList<Student>();
+		Student s = null;
+		while(rs.next()) {
+			s = new Student(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("major"), rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
+			stuList.add(s);
+		}
+		return stuList;
+	}
+	
+	/**
+	 * ·根据学院信息查询学生数据
+	 * ·注：此查询方法需修改MySQL的默认模式，即去除select @@global.sql_mode查询中的ONLY_FULL_GROUP_BY
+	 * ·注：使用set @@global.sql_mode = ''方法
+	 * 
+	 * @param college
+	 * @return 学生信息列表
+	 * @throws SQLException
+	 */
+	public List<Student> quaryByDept(String college) throws SQLException {
+		Connection conn = DbUtil.getConnection();
+		Statement stmt = conn.createStatement();
+		//SQL
+		String sql = "select *,count(distinct id) from studentinfo where college = '" + college + "' group by id";
+		if (college.equalsIgnoreCase("西北师范大学")) {
+			sql = "select *,count(distinct id) from studentinfo group by id";
+		}
+		//执行
+		ResultSet rs = stmt.executeQuery(sql);
+		//添加用户信息
+		List<Student> stuList = new ArrayList<Student>();
+		Student s = null;
+		while(rs.next()) {
+			s = new Student(rs.getString("id"), rs.getString("name"), rs.getString("sex"), rs.getString("college"), 
+					rs.getString("major"), rs.getString("phoneNumber"), rs.getDate("recordDate"), rs.getString("province"), 
+					rs.getString("city"), rs.getString("diagnosed"), rs.getBigDecimal("temperature"));
 			stuList.add(s);
 		}
 		return stuList;

@@ -32,11 +32,11 @@ public class ExcelUtil {
 	//private static String passString = "count";
 
 	/**
-	 * 将list集合转成Excel文件
+	 * ·该方法将list集合转成Excel文件
 	 * 
 	 * @param list 对象集合
 	 * @param path 输出路径
-	 * @return 返回文件路径
+	 * @return 输出的文件路径
 	 */
 	public static String createExcel(List<? extends Object> list, String path) {
 		String result = "";
@@ -115,7 +115,7 @@ public class ExcelUtil {
 	}
 
 	/**
-	 * ·根据属性名获取属性值
+	 * ·该方法根据属性名获取属性值
 	 * 
 	 * @param fieldName 属性名
 	 * @param o

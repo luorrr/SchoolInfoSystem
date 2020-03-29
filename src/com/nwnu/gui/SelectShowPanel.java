@@ -25,7 +25,7 @@ import com.nwnu.pojo.Teacher;
 /**
  * Filename: SelectShowPanel.java
  * 
- * ·显示查询结果
+ * ·查询结果显示界面
  * 
  * @author Luor
  * @version 1.0
@@ -34,6 +34,16 @@ public class SelectShowPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * ·此界面显示管理员查询信息得到的结果
+	 * 
+	 * @param showWin
+	 * @param showPanel
+	 * @param manager
+	 * @param chooseType
+	 * @param stuList
+	 * @param teaList
+	 */
 	public SelectShowPanel(JFrame showWin, JPanel showPanel, Manager manager, int chooseType, List<Student> stuList, 
 			List<Teacher> teaList) {
 		// clear panel
@@ -138,7 +148,7 @@ public class SelectShowPanel extends JPanel {
 	}
 	
 	/**
-	 * ·表格行列宽自适应
+	 * ·此方法用于表格行列宽自适应
 	 * 
 	 * @param table
 	 */

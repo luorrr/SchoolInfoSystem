@@ -3,7 +3,7 @@ package com.nwnu.test;
 /**
  * Filename: SystemMenu.java
  * 
- * ·系统界面显示
+ * ·系统界面显示（命令行）
  * 
  * @author Luor
  * @version 1.0
@@ -11,10 +11,10 @@ package com.nwnu.test;
 public class SystemMenu {
 	
 	/**
+	 * ·自定义格式化输出方法
+	 * 
 	 * @param n
 	 * @param c
-	 * 
-	 * ·自定义格式化输出
 	 */
 	public static void prints(int n,String c)
 	{
@@ -25,7 +25,7 @@ public class SystemMenu {
 	}
 	
 	/**
-	 * ·打印系统界面
+	 * ·打印系统主界面
 	 */
 	public static void mainMenu()
 	{

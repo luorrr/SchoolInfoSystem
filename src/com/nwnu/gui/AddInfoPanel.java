@@ -29,7 +29,7 @@ import com.nwnu.pojo.Teacher;
 /**
  * Filename: AddInfoPanel.java
  * 
- * ·添加成员信息
+ * ·成员信息添加界面
  * 
  * @author Luor
  * @version 1.0
@@ -48,6 +48,14 @@ public class AddInfoPanel extends JPanel {
 	private static int ScreenWidth = 450;
 	private static int ScreenHeight = 600;
 
+	/**
+	 * ·在此界面中填写成员的疫情相关信息
+	 * 
+	 * @param win
+	 * @param mainPanel
+	 * @param manager
+	 * @param chooseType
+	 */
 	public AddInfoPanel(JFrame win, JPanel mainPanel, Manager manager, int chooseType) {
 		// clear panel
 		mainPanel.removeAll();

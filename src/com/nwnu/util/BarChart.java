@@ -36,12 +36,12 @@ import com.nwnu.pojo.Teacher;
  * @version 1.0
  */
 public class BarChart {
-	
-	private static ChartPanel panel;
+
+	private static ChartPanel panel = null;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private static StudentDao stuDao = new StudentDao();
 	private static TeacherDao teaDao = new TeacherDao();
-	
+
 	/**
 	 * ·柱状图参数设置
 	 * 
@@ -50,7 +50,7 @@ public class BarChart {
 	 * @param choice
 	 */
 	public BarChart(String dateBeginString, String dateEndString, int choice) {
-		//处理表名与日期数据
+		// 处理表名与日期数据
 		Date dateBegin = null;
 		Date dateEnd = null;
 		try {
@@ -66,47 +66,46 @@ public class BarChart {
 		} else if (choice == 2) {
 			title = dateBegin + "至" + dateEnd + "感染人员地区分布统计";
 		}
-		
-		//创建数据集
-		CategoryDataset dataSet = getDateSet(dateBegin, dateEnd, choice);
-		//处理图表
-		JFreeChart chart = ChartFactory.createBarChart3D(title, "数据类型", "数量", dataSet, 
-				PlotOrientation.VERTICAL, true, false, false);
-		//处理汉字
-		//获取图表区域对象
+
+		// 创建数据集
+		CategoryDataset dataSet = getDataSet(dateBegin, dateEnd, choice);
+		// 处理图表
+		JFreeChart chart = ChartFactory.createBarChart3D(title, "数据类型", "数量", dataSet, PlotOrientation.VERTICAL, true,
+				false, false);
+		// 处理汉字
+		// 获取图表区域对象
 		CategoryPlot plot = chart.getCategoryPlot();
-		
-		//设置宽度
-		
+
+		// 设置宽度
+
 		BarRenderer3D barRenderer = new BarRenderer3D();
 		barRenderer.setBaseItemLabelsVisible(true);
 		barRenderer.setBaseItemLabelPaint(Color.black);
-		barRenderer.setBaseItemLabelFont(new Font("黑体",Font.BOLD,10));
+		barRenderer.setBaseItemLabelFont(new Font("黑体", Font.BOLD, 10));
 		barRenderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
 		barRenderer.setMaximumBarWidth(0.5);
 		barRenderer.setMinimumBarLength(0.1);
-		//barRenderer.setItemMargin(-0.1);
-		
+		// barRenderer.setItemMargin(-0.1);
+
 		plot.setRenderer(barRenderer);
-		
-		//水平底部列表
+
+		// 水平底部列表
 		CategoryAxis domainAxis = plot.getDomainAxis();
-		chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF); 
-		//垂直标题
-		domainAxis.setTickLabelFont(new Font("宋体",Font.BOLD,6));
-		//水平底部标题
-		domainAxis.setLabelFont(new Font("黑体", Font.BOLD,16));
-		//获取柱状
+		chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+		// 垂直标题
+		domainAxis.setTickLabelFont(new Font("宋体", Font.BOLD, 6));
+		// 水平底部标题
+		domainAxis.setLabelFont(new Font("黑体", Font.BOLD, 16));
+		// 获取柱状
 		ValueAxis rangeAxis = plot.getRangeAxis();
-		rangeAxis.setLabelFont(new Font("黑体",Font.BOLD,15));
+		rangeAxis.setLabelFont(new Font("黑体", Font.BOLD, 15));
 		chart.getLegend().setItemFont(new Font("黑体", Font.BOLD, 12));
-		//设置标题字体
-		chart.getTitle().setFont(new Font("宋体",Font.BOLD,20));
-		
-		
+		// 设置标题字体
+		chart.getTitle().setFont(new Font("宋体", Font.BOLD, 20));
+
 		panel = new ChartPanel(chart, true);
 	}
-	
+
 	/**
 	 * ·数据集合获取与添加
 	 * 
@@ -115,11 +114,11 @@ public class BarChart {
 	 * @param choice
 	 * @return 数据集
 	 */
-	public static CategoryDataset getDateSet(Date dateBegin, Date dateEnd, int choice) {
+	public static CategoryDataset getDataSet(Date dateBegin, Date dateEnd, int choice) {
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		List<Student> stuList = new ArrayList<Student>();
 		List<Teacher> teaList = new ArrayList<Teacher>();
-		
+
 		try {
 			if (choice == 1) {
 				stuList = stuDao.quaryByDate(dateBegin, dateEnd, false);
@@ -128,33 +127,33 @@ public class BarChart {
 				stuList = stuDao.quaryByDate(dateBegin, dateEnd, true);
 				teaList = teaDao.quaryByDate(dateBegin, dateEnd, true);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.print("查询出错！\n");
 		}
-		
+
 		if (choice == 1) {
-			for (Student s:stuList) {
+			for (Student s : stuList) {
 				dataSet.addValue(s.getCount(), "学生", s.getRecordDate());
 			}
-			for (Teacher t:teaList) {
+			for (Teacher t : teaList) {
 				dataSet.addValue(t.getCount(), "教师", t.getRecordDate());
 			}
 		} else {
-			for (Student s:stuList) {
+			for (Student s : stuList) {
 				dataSet.addValue(s.getCount(), s.getProvince(), s.getProvince());
 			}
-			for (Teacher t:teaList) {
+			for (Teacher t : teaList) {
 				dataSet.addValue(t.getCount(), t.getProvince(), t.getProvince());
 			}
 		}
 		return dataSet;
 	}
-	
+
 	/**
-	 * ·返回ChartPanel
+	 * ·返回ChartPanel对象
 	 * 
 	 * @return panel
 	 */

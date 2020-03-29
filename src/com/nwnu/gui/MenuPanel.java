@@ -18,7 +18,7 @@ import com.nwnu.pojo.Manager;
 /**
  * Filename: MenuPanel.java
  * 
- * ·菜单界面
+ * ·主菜单界面
  * 
  * @author Luor
  * @version 1.0
@@ -32,6 +32,13 @@ public class MenuPanel extends JPanel {
 	private static int ShowScreenWidth = 1200;
 	private static int ShowScreenHeight = 660;
 	
+	/**
+	 * ·在此界面进行功能的选择
+	 * 
+	 * @param win
+	 * @param mainPanel
+	 * @param manager
+	 */
 	public MenuPanel(JFrame win, JPanel mainPanel, Manager manager) {
 		// clear panel
 		mainPanel.removeAll();
@@ -104,7 +111,7 @@ public class MenuPanel extends JPanel {
 		// fourthPanel
 		JPanel fourthPanel = new JPanel();
 		fourthPanel.setLayout(new GridLayout(1, 1, 10, 10));
-		JButton btn7 = new JButton("Excel导出");
+		JButton btn7 = new JButton("部门成员信息上报情况统计");
 		btn7.setFont(btnFont);
 		fourthPanel.add(btn7);
 		fourthPanel.setBorder(fourthTitleBorder);
@@ -139,24 +146,45 @@ public class MenuPanel extends JPanel {
 			CreateChartFrame(manager, 1);
 		});
 		btn7.addActionListener(event -> {
-			
+			CreateChartFrame(manager);
 		});
 	}
 	
-	public void CreateChartFrame(Manager manager, int chooseType) {
+	/**
+	 * ·此函数负责完成统计图显示界面的创建
+	 * 
+	 * @param manager
+	 * @param chooseType
+	 */
+	public void CreateChartFrame(Manager manager, int... chooseType) {
 		JFrame showWin = new JFrame();
 		JPanel showPanel = new JPanel();
 
 		showPanel.setSize(ShowScreenWidth, ShowScreenHeight);
+		
+		ShowChartPanel showChartPanel = null;
+		ShowPieChartPanel showPieChartPanel = null;
+		if (chooseType.length > 0) {
+			showChartPanel = new ShowChartPanel(showWin, showPanel, manager, chooseType[0]);
+			showChartPanel.setSize(ShowScreenWidth, ShowScreenHeight);
 
-		ShowChartPanel showChartPanel = new ShowChartPanel(showWin, showPanel, manager, chooseType);
-		showChartPanel.setSize(ShowScreenWidth, ShowScreenHeight);
+			showWin.setSize(ShowScreenWidth, ShowScreenHeight);
+			showWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			showWin.setLocationRelativeTo(null);
+			showWin.setTitle("西北师范大学疫情防控信息统计系统");
+			showWin.setResizable(false);
+			showWin.setVisible(true);
+		} else {
+			showPieChartPanel = new ShowPieChartPanel(showWin, showPanel, manager);
+			showPieChartPanel.setSize(ShowScreenWidth, ShowScreenHeight);
 
-		showWin.setSize(ShowScreenWidth, ShowScreenHeight);
-		showWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		showWin.setLocationRelativeTo(null);
-		showWin.setTitle("西北师范大学疫情防控信息统计系统");
-		showWin.setResizable(false);
-		showWin.setVisible(true);
+			showWin.setSize(ShowScreenWidth, ShowScreenHeight);
+			showWin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			showWin.setLocationRelativeTo(null);
+			showWin.setTitle("西北师范大学疫情防控信息统计系统");
+			showWin.setResizable(false);
+			showWin.setVisible(true);
+		}
 	}
+	
 }
